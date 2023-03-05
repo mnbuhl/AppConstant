@@ -1,12 +1,8 @@
 ﻿namespace AppConstant;
 
-public abstract class AppConstant<TConst> : AppConstant<TConst, string> where TConst : AppConstant<TConst>, new()
-{
-}
-
 public abstract class AppConstant<TConst, TValue> 
     where TConst : AppConstant<TConst, TValue>, new()
-    where TValue : IEquatable<TValue>, IComparable<TValue>
+    where TValue : IComparable<TValue>, IEquatable<TValue>
 {
     public TValue Value { get; set; } = default!;
 

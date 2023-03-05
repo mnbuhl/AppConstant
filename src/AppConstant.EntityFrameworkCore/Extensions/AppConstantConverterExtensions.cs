@@ -9,10 +9,10 @@ public static class AppConstantConverterExtensions
 
     public static void AddAppConstantConverters(this ModelConfigurationBuilder builder)
     {
-        // @TODO fix this - only returning age restriction
         var propertyTypes = builder.CreateModelBuilder(null).Model.GetEntityTypes()
-            .SelectMany(e => e.ClrType.GetProperties())
+            .SelectMany(x => x.ClrType.GetProperties())
             .Select(p => p.PropertyType)
+            .Distinct()
             .GetAppConstantTypes();
 
         foreach (var propertyType in propertyTypes)

@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
-    opt.UseInMemoryDatabase("AppConstant.Demo");
+    opt.UseSqlite("Data Source=example.db");
 });
 
 var app = builder.Build();
