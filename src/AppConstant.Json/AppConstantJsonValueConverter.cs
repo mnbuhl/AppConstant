@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace AppConstant.Converters;
+namespace AppConstant.Json;
 
 public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TConst> 
     where TConst : AppConstant<TConst, TValue>, new()
