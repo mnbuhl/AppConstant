@@ -6,12 +6,29 @@ public abstract class AppConstant<TConst, TValue>
 {
     public TValue Value { get; set; } = default!;
 
-    public static TConst Set(TValue value)
+    private static IEnumerable<TConst>? _validValues;
+
+    protected static TConst Set(TValue value)
     {
         return new TConst
         {
             Value = value
         };
+    }
+
+    public static TConst Get(TValue value)
+    {
+        try
+        {
+            _validValues ??= typeof(TConst).GetProperties()
+                .Select(p => p.GetValue(null)).Cast<TConst>();
+
+            return _validValues.First(v => v.Value.Equals(value));
+        }
+        catch (Exception ex)
+        {
+            throw new ArgumentException($"No {typeof(TConst).Name} with value {value} found.", ex);
+        }
     }
 
     public static TConst[] All => typeof(TConst).GetProperties().Select(p => p.GetValue(null)).Cast<TConst>().ToArray();

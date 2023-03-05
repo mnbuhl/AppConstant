@@ -16,11 +16,11 @@ public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TCons
 
         try
         {
-            return AppConstant<TConst, TValue>.Set((TValue)Convert.ChangeType(value, typeof(TValue)));
+            return AppConstant<TConst, TValue>.Get((TValue)Convert.ChangeType(value, typeof(TValue)));
         }
         catch (Exception e)
         {
-            throw new JsonException($"Expected a {typeof(TValue)}, but got {value}.", e);
+            throw new JsonException($"Could not convert {value} to {typeof(TConst)}", e);
         }
     }
 
