@@ -4,7 +4,7 @@ public abstract class AppConstant<TConst, TValue>
     where TConst : AppConstant<TConst, TValue>, new()
     where TValue : IComparable<TValue>, IEquatable<TValue>
 {
-    public TValue Value { get; set; } = default!;
+    public TValue Value { get; private set; } = default!;
 
     private static IEnumerable<TConst>? _validValues;
 
@@ -32,7 +32,7 @@ public abstract class AppConstant<TConst, TValue>
     }
 
     public static TConst[] All => typeof(TConst).GetProperties().Select(p => p.GetValue(null)).Cast<TConst>().ToArray();
-    
+
     public override string ToString() => Value.ToString();
     public static implicit operator TValue(AppConstant<TConst, TValue> type) => type.Value;
     public static implicit operator AppConstant<TConst, TValue>(TValue value) => Set(value);
