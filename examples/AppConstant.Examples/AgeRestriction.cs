@@ -1,4 +1,4 @@
-﻿namespace AppConstant.Demo.Constants;
+﻿namespace AppConstant.Examples;
 
 public class AgeRestriction : AppConstant<AgeRestriction, int>
 {

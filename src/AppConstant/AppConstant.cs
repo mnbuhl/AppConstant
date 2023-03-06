@@ -1,13 +1,13 @@
-﻿namespace AppConstant;
+﻿using System.Reflection;
+
+namespace AppConstant;
 
 public abstract class AppConstant<TConst, TValue> 
     where TConst : AppConstant<TConst, TValue>, new()
     where TValue : IComparable<TValue>, IEquatable<TValue>
 {
     public TValue Value { get; private set; } = default!;
-
-    private static IEnumerable<TConst>? _validValues;
-
+    
     protected static TConst Set(TValue value)
     {
         return new TConst
@@ -20,10 +20,7 @@ public abstract class AppConstant<TConst, TValue>
     {
         try
         {
-            _validValues ??= typeof(TConst).GetProperties()
-                .Select(p => p.GetValue(null)).Cast<TConst>();
-
-            return _validValues.First(v => v.Value.Equals(value));
+            return All.Value.First(v => v.Value.Equals(value));
         }
         catch (Exception ex)
         {
@@ -31,7 +28,7 @@ public abstract class AppConstant<TConst, TValue>
         }
     }
 
-    public static TConst[] All => typeof(TConst).GetProperties().Select(p => p.GetValue(null)).Cast<TConst>().ToArray();
+    public static Lazy<TConst[]> All => new Lazy<TConst[]>(GetAllValues, LazyThreadSafetyMode.ExecutionAndPublication);
 
     public override string ToString() => Value.ToString();
     public static implicit operator TValue(AppConstant<TConst, TValue> type) => type.Value;
@@ -42,4 +39,13 @@ public abstract class AppConstant<TConst, TValue>
     public static bool operator !=(AppConstant<TConst, TValue> a, AppConstant<TConst, TValue> b) => !a.Value.Equals(b.Value);
     public override bool Equals(object? obj) => obj is AppConstant<TConst, TValue> other && other.Value.Equals(Value);
     public override int GetHashCode() => Value.GetHashCode();
+    
+    private static TConst[] GetAllValues()
+    {
+        return typeof(TConst).GetProperties(BindingFlags.Public|BindingFlags.Static)
+            .Where(t => t.PropertyType == typeof(TConst))
+            .Select(t => t.GetValue(null))
+            .Cast<TConst>()
+            .ToArray();
+    }
 }

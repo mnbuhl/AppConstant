@@ -1,4 +1,4 @@
-﻿using AppConstant.Demo.Constants;
+﻿using AppConstant.Examples;
 
 namespace AppConstant.Demo.Models;
 
