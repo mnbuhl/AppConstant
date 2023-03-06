@@ -28,7 +28,7 @@ public abstract class AppConstant<TConst, TValue>
         }
     }
 
-    public static Lazy<TConst[]> All => new Lazy<TConst[]>(GetAllValues, LazyThreadSafetyMode.ExecutionAndPublication);
+    public static Lazy<List<TConst>> All => new Lazy<List<TConst>>(GetAllValues, LazyThreadSafetyMode.ExecutionAndPublication);
 
     public override string ToString() => Value.ToString();
     public static implicit operator TValue(AppConstant<TConst, TValue> type) => type.Value;
@@ -40,12 +40,18 @@ public abstract class AppConstant<TConst, TValue>
     public override bool Equals(object? obj) => obj is AppConstant<TConst, TValue> other && other.Value.Equals(Value);
     public override int GetHashCode() => Value.GetHashCode();
     
-    private static TConst[] GetAllValues()
+    private static List<TConst> GetAllValues()
     {
-        return typeof(TConst).GetProperties(BindingFlags.Public|BindingFlags.Static)
-            .Where(t => t.PropertyType == typeof(TConst))
-            .Select(t => t.GetValue(null))
-            .Cast<TConst>()
-            .ToArray();
+        var properties = typeof(TConst).GetProperties();
+        var values = new List<TConst>();
+        
+        foreach (var property in properties)
+        {
+            if (property.PropertyType == typeof(TConst) && property.GetGetMethod() != null && property.GetGetMethod().IsStatic)
+            {
+                values.Add((TConst)property.GetValue(null));
+            }
+        }
+        return values;
     }
 }
