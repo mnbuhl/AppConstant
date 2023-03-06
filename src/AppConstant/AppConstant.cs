@@ -8,6 +8,14 @@ public abstract class AppConstant<TConst, TValue>
 {
     public TValue Value { get; private set; } = default!;
     
+    public static readonly IReadOnlyList<TConst> All;
+    private static readonly Dictionary<TValue, TConst> ValueLookup = new Dictionary<TValue, TConst>();
+    
+    static AppConstant()
+    {
+        All = GetAllValues();
+    }
+    
     protected static TConst Set(TValue value)
     {
         return new TConst
@@ -18,17 +26,24 @@ public abstract class AppConstant<TConst, TValue>
 
     public static TConst Get(TValue value)
     {
-        try
+        if (ValueLookup.TryGetValue(value, out var result))
         {
-            return All.Value.First(v => v.Value.Equals(value));
+            return result;
         }
-        catch (Exception ex)
-        {
-            throw new ArgumentException($"No {typeof(TConst).Name} with value {value} found.", ex);
-        }
-    }
 
-    public static Lazy<List<TConst>> All => new Lazy<List<TConst>>(GetAllValues, LazyThreadSafetyMode.ExecutionAndPublication);
+        lock (ValueLookup)
+        {
+            result = All.FirstOrDefault(c => c.Value.Equals(value));
+            
+            if (result is not null)
+            {
+                ValueLookup.Add(value, result);
+                return result;
+            }
+        }
+
+        throw new ArgumentException($"No {typeof(TConst).Name} with value {value} found.");
+    }
 
     public override string ToString() => Value.ToString();
     public static implicit operator TValue(AppConstant<TConst, TValue> type) => type.Value;
@@ -42,16 +57,18 @@ public abstract class AppConstant<TConst, TValue>
     
     private static List<TConst> GetAllValues()
     {
-        var properties = typeof(TConst).GetProperties();
-        var values = new List<TConst>();
-        
+        var properties = typeof(TConst).GetProperties(BindingFlags.Public | BindingFlags.Static);
+        var values = new List<TConst>(properties.Length);
+
         foreach (var property in properties)
         {
-            if (property.PropertyType == typeof(TConst) && property.GetGetMethod() != null && property.GetGetMethod().IsStatic)
+            if (property.PropertyType == typeof(TConst) && property.GetGetMethod() != null)
             {
-                values.Add((TConst)property.GetValue(null));
+                var value = (TConst)property.GetValue(null);
+                values.Add(value);
             }
         }
+
         return values;
     }
 }
