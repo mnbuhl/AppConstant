@@ -1,28 +1,20 @@
-using AppConstant.AspNetCore.Binding;
-using AppConstant.AspNetCore.Json;
+using AppConstant.AspNetCore;
 using AppConstant.Demo.Data;
 using AppConstant.Examples;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(c =>
+builder.Services.AddControllers().AddAppConstant(x =>
 {
-    c.ModelBinderProviders.Insert(0, new AppConstantModelBinderProvider());
-}).AddJsonOptions(x => 
-    x.JsonSerializerOptions.Converters.AddAppConstantConverters(typeof(ProductType).Assembly));
+    x.Assembly = typeof(ProductType).Assembly;
+    x.ProjectUsingSwagger = true;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.MapType<ProductType>(() => new OpenApiSchema
-    {
-        Type = "string"
-    });
-});
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {

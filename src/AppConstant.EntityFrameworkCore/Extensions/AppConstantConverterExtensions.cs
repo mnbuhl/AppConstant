@@ -1,4 +1,4 @@
-﻿using AppConstant.Extensions;
+﻿using AppConstant.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace AppConstant.EntityFrameworkCore.Extensions;

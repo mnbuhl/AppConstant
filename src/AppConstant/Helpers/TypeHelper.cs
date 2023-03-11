@@ -2,7 +2,8 @@
 
 [assembly: InternalsVisibleTo("AppConstant.EntityFrameworkCore")]
 [assembly: InternalsVisibleTo("AppConstant.AspNetCore")]
-namespace AppConstant.Extensions;
+[assembly: InternalsVisibleTo("AppConstant.Unit")]
+namespace AppConstant.Helpers;
 
 public static class TypeHelper
 {
@@ -32,5 +33,14 @@ public static class TypeHelper
         }
 
         return null;
+    }
+
+    internal static bool IsNumeric(this Type type)
+    {
+        bool isPrimitive = type.IsPrimitive || type == typeof(decimal);
+        bool isConvertible = type.GetInterfaces().Contains(typeof(IConvertible));
+        bool isNumeric = isPrimitive && isConvertible;
+
+        return isNumeric;
     }
 }
