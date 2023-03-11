@@ -2,45 +2,43 @@
 
 namespace AppConstant;
 
-public abstract class AppConstant<TConst, TValue> 
+public abstract class AppConstant<TConst, TValue>
     where TConst : AppConstant<TConst, TValue>, new()
     where TValue : IComparable<TValue>, IEquatable<TValue>
 {
     private TValue _value = default!;
 
-    public static readonly IReadOnlyList<TConst> All;
-    private static readonly Dictionary<TValue, TConst> ValueLookup = new Dictionary<TValue, TConst>();
-    
-    static AppConstant()
-    {
-        All = GetAllValues();
-    }
-    
+    public static readonly Lazy<IReadOnlyList<TConst>> All =
+        new Lazy<IReadOnlyList<TConst>>(GetAllValues, LazyThreadSafetyMode.ExecutionAndPublication);
+
+    private static readonly Lazy<Dictionary<TValue, TConst>> ValueLookup =
+        new Lazy<Dictionary<TValue, TConst>>(LazyThreadSafetyMode.ExecutionAndPublication);
+
     public static TConst Get(TValue value)
     {
-        if (ValueLookup.TryGetValue(value, out var result))
+        if (ValueLookup.Value.TryGetValue(value, out var result))
         {
             return result;
         }
 
         lock (ValueLookup)
         {
-            result = All.FirstOrDefault(c => c._value.Equals(value));
-            
+            result = All.Value.FirstOrDefault(c => c._value.Equals(value));
+
             if (result is not null)
             {
-                ValueLookup.Add(value, result);
+                ValueLookup.Value.Add(value, result);
                 return result;
             }
         }
 
-        throw new ArgumentException($"No {typeof(TConst).Name} with value {value} found.");
+        throw new ArgumentException($"No '{typeof(TConst).Name}' with value '{value}' found.");
     }
-    
+
     public static bool TryGetValue(TValue value, out TConst result)
     {
         var found = false;
-        
+
         try
         {
             result = Get(value);
@@ -54,7 +52,7 @@ public abstract class AppConstant<TConst, TValue>
 
         return found;
     }
-    
+
     protected static TConst Set(TValue value)
     {
         return new TConst
@@ -78,7 +76,7 @@ public abstract class AppConstant<TConst, TValue>
     public override int GetHashCode() => _value.GetHashCode();
     public override string ToString() => _value.ToString();
 
-    
+
     private static List<TConst> GetAllValues()
     {
         var properties = typeof(TConst).GetProperties(BindingFlags.Public | BindingFlags.Static);

@@ -19,8 +19,8 @@ public class GetFromValueBenchmark
     public void GetConstant_FromLetter_Z() => Letter.Get('Z');
     
     [Benchmark]
-    public void GetConstant_FromRole_Admin() => Role.Get("Admin");
+    public void GetConstant_FromRole_Admin() => Role.Get("admin");
     
     [Benchmark]
-    public void GetConstant_FromRole_Guest() => Role.Get("Guest");
+    public void GetConstant_FromRole_Guest() => Role.Get("guest");
 }

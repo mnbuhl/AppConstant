@@ -1,5 +1,5 @@
-using AppConstant;
-using AppConstant.AspNetCore.Extensions;
+using AppConstant.AspNetCore.Binding;
+using AppConstant.AspNetCore.Json;
 using AppConstant.Demo.Data;
 using AppConstant.Examples;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(x => 
+builder.Services.AddControllers(c =>
+{
+    c.ModelBinderProviders.Insert(0, new AppConstantModelBinderProvider());
+}).AddJsonOptions(x => 
     x.JsonSerializerOptions.Converters.AddAppConstantConverters(typeof(ProductType).Assembly));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
