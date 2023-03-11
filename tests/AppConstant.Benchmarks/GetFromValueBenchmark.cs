@@ -1,4 +1,4 @@
-﻿using AppConstant.Benchmarks.Fixtures;
+﻿using AppConstant.Examples;
 using BenchmarkDotNet.Attributes;
 
 namespace AppConstant.Benchmarks;

@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\examples\AppConstant.Examples\AppConstant.Examples.csproj" />
       <ProjectReference Include="..\..\src\AppConstant\AppConstant.csproj" />
     </ItemGroup>
 

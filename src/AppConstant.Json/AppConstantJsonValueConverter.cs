@@ -26,7 +26,7 @@ public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TCons
 
     public override void Write(Utf8JsonWriter writer, TConst value, JsonSerializerOptions options)
     {
-        WriteJsonValue(ref writer, value.Value);
+        WriteJsonValue(ref writer, value.InternalGetValue());
     }
 
     private static TValue ReadJsonValue(ref Utf8JsonReader reader)

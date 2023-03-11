@@ -1,4 +1,4 @@
-﻿namespace AppConstant.Benchmarks.Fixtures;
+﻿namespace AppConstant.Examples;
 
 public class Letter : AppConstant<Letter, char>
 {
