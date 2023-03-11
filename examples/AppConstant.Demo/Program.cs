@@ -1,6 +1,6 @@
 using AppConstant.Demo.Data;
 using AppConstant.Examples;
-using AppConstant.Json;
+using AppConstant.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

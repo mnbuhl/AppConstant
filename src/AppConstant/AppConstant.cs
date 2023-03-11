@@ -37,6 +37,24 @@ public abstract class AppConstant<TConst, TValue>
         throw new ArgumentException($"No {typeof(TConst).Name} with value {value} found.");
     }
     
+    public static bool TryGetValue(TValue value, out TConst result)
+    {
+        var found = false;
+        
+        try
+        {
+            result = Get(value);
+            found = true;
+        }
+        catch (ArgumentException)
+        {
+            result = default!;
+            return found;
+        }
+
+        return found;
+    }
+    
     protected static TConst Set(TValue value)
     {
         return new TConst
@@ -46,7 +64,6 @@ public abstract class AppConstant<TConst, TValue>
     }
 
     public int CompareTo(TConst other) => _value.CompareTo(other._value);
-    public override string ToString() => _value.ToString();
     public override bool Equals(object? obj) => obj is AppConstant<TConst, TValue> other && other._value.Equals(_value);
     public static implicit operator TValue(AppConstant<TConst, TValue> type) => type._value;
     public static implicit operator AppConstant<TConst, TValue>(TValue value) => Set(value);
@@ -59,6 +76,8 @@ public abstract class AppConstant<TConst, TValue>
     public static bool operator <=(AppConstant<TConst, TValue> a, AppConstant<TConst, TValue> b) => a.CompareTo(b) <= 0;
     public static bool operator >=(AppConstant<TConst, TValue> a, AppConstant<TConst, TValue> b) => a.CompareTo(b) >= 0;
     public override int GetHashCode() => _value.GetHashCode();
+    public override string ToString() => _value.ToString();
+
     
     private static List<TConst> GetAllValues()
     {

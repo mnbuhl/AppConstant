@@ -1,12 +1,14 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace AppConstant.Json;
+namespace AppConstant.Converters;
 
 public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TConst> 
     where TConst : AppConstant<TConst, TValue>, new()
     where TValue : IEquatable<TValue>, IComparable<TValue>
 {
+    public override bool HandleNull => true;
+
     public override TConst? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType is JsonTokenType.Null)

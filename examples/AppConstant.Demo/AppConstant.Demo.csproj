@@ -18,7 +18,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\AppConstant.EntityFrameworkCore\AppConstant.EntityFrameworkCore.csproj" />
-      <ProjectReference Include="..\..\src\AppConstant.Json\AppConstant.Json.csproj" />
       <ProjectReference Include="..\AppConstant.Examples\AppConstant.Examples.csproj" />
     </ItemGroup>
 
