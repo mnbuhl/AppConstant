@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("AppConstant.EntityFrameworkCore")]
-[assembly: InternalsVisibleTo("AppConstant.Json")]
+[assembly: InternalsVisibleTo("AppConstant.AspNetCore")]
 namespace AppConstant.Extensions;
 
 public static class TypeExtensions

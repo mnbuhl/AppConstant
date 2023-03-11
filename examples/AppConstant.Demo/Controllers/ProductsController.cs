@@ -1,5 +1,6 @@
 ﻿using AppConstant.Demo.Data;
 using AppConstant.Demo.Models;
+using AppConstant.Examples;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,16 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<ICollection<Product>>> GetAllProducts()
+    public async Task<ActionResult<ICollection<Product>>> GetAllProducts([FromQuery] ProductType? type = null)
     {
-        return await _context.Products.ToListAsync();
+        var query = _context.Products.AsQueryable();
+        
+        if (type is not null)
+        {
+            query = query.Where(x => x.Type == type);
+        }
+        
+        return await query.ToListAsync();
     }
     
     [HttpPost]

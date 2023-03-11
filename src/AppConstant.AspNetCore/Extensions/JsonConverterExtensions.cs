@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
-using AppConstant.Converters;
 using System.Text.Json.Serialization;
+using AppConstant.AspNetCore.Converters;
+using AppConstant.Extensions;
 
-namespace AppConstant.Extensions;
+namespace AppConstant.AspNetCore.Extensions;
 
 public static class JsonConverterExtensions
 {

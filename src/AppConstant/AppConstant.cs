@@ -7,7 +7,7 @@ public abstract class AppConstant<TConst, TValue>
     where TValue : IComparable<TValue>, IEquatable<TValue>
 {
     private TValue _value = default!;
-    
+
     public static readonly IReadOnlyList<TConst> All;
     private static readonly Dictionary<TValue, TConst> ValueLookup = new Dictionary<TValue, TConst>();
     

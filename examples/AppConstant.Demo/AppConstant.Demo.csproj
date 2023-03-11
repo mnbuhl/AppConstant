@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\AppConstant.AspNetCore\AppConstant.AspNetCore.csproj" />
       <ProjectReference Include="..\..\src\AppConstant.EntityFrameworkCore\AppConstant.EntityFrameworkCore.csproj" />
       <ProjectReference Include="..\AppConstant.Examples\AppConstant.Examples.csproj" />
     </ItemGroup>
