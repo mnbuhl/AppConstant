@@ -1,12 +1,10 @@
 # AppConstant
-___
 AppConstant is a simple type-safe constant* library for C# and ASP.NET Core.
 It allows you to define type-safe constants that translates to web and database friendly values.
 
 <sub><sub>* technically not a constant</sub></sub>
 
 ## Installation (coming soon)
-___
 
 [//]: # (AppConstant is available on NuGet. Install it using the following command:)
 
@@ -26,7 +24,6 @@ ___
 [//]: # (    dotnet add package AppConstant)
 
 ## Usage
-___
 
 ### Defining a constant
 
