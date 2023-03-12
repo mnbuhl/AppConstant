@@ -5,8 +5,6 @@ namespace AppConstant.EntityFrameworkCore.Extensions;
 
 public static class AppConstantConverterExtensions
 {
-    #if NET6_0_OR_GREATER
-
     public static void AddAppConstantConverters(this ModelConfigurationBuilder builder)
     {
         var propertyTypes = builder.CreateModelBuilder(null).Model.GetEntityTypes()
@@ -23,6 +21,4 @@ public static class AppConstantConverterExtensions
             builder.Properties(propertyType).HaveConversion(converterType);
         }
     }
-    
-    #endif
 }

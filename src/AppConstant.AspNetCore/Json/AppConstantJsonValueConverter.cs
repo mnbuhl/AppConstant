@@ -8,7 +8,7 @@ public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TCons
     where TValue : IEquatable<TValue>, IComparable<TValue>
 {
     public override bool HandleNull => true;
-
+    
     public override TConst? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType is JsonTokenType.Null)

@@ -10,7 +10,7 @@ public class AppConstantModelBinder : IModelBinder
     {
         if (bindingContext is null)
         {
-            throw new ArgumentException(nameof(bindingContext));
+            throw new ArgumentNullException(nameof(bindingContext));
         }
 
         var type = bindingContext.ModelType;

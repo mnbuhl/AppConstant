@@ -4,7 +4,6 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,8 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="7.0.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="System.Text.Json" Version="4.6.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
