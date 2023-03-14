@@ -11,10 +11,10 @@ jobs:
         
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+      - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
+          
       - uses: actions/cache@v3
         with:
           path: ~/.nuget/packages
@@ -22,9 +22,15 @@ jobs:
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
             ${{ runner.os }}-nuget
+            
+      - name: Display dotnet version
+        run: dotnet --version
+        
       - name: Restore dependencies
         run: dotnet restore
+        
       - name: Build
         run: dotnet build --configuration Release --no-restore
+        
       - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-restore --verbosity normal
