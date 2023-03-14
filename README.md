@@ -4,24 +4,24 @@ It allows you to define type-safe constants that translates to web and database 
 
 <sub><sub>* technically not a constant</sub></sub>
 
-## Installation (coming soon)
+## Installation
 
-[//]: # (AppConstant is available on NuGet. Install it using the following command:)
+AppConstant is available on NuGet. Install it using the following command:
 
-[//]: # ()
-[//]: # (    dotnet add package AppConstant.AspNetCore)
 
-[//]: # ()
-[//]: # (Planning on using it together with Entity Framework Core? Install the following package as well:)
+    dotnet add package AppConstant.AspNetCore
 
-[//]: # ()
-[//]: # (    dotnet add package AppConstant.EntityFrameworkCore)
 
-[//]: # ()
-[//]: # (Or just planning on using it in a C# project? Install the following package:)
+Planning on using it together with Entity Framework Core? Install the following package as well:
 
-[//]: # ()
-[//]: # (    dotnet add package AppConstant)
+
+    dotnet add package AppConstant.EntityFrameworkCore
+
+
+Or just planning on using it in a C# project? Install the following package:
+
+
+    dotnet add package AppConstant
 
 ## Usage
 
