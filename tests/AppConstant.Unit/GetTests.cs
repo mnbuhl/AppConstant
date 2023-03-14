@@ -43,9 +43,9 @@ public class GetTests
     [MemberData(nameof(TryGetFixture))]
     public void TryGetAppConstant_WithValue_ReturnsExpected(char value, Letter letter, bool expected)
     {
-        bool result = Letter.TryGetValue(value, out var resultLetter);
+        bool result = Letter.TryGetFromValue(value, out var resultLetter);
         
-        result = result && resultLetter == letter;
+        result = result && resultLetter! == letter;
         
         result.Should().Be(expected);
     }
@@ -61,7 +61,7 @@ public class GetTests
     [Fact]
     public void TryGetAppConstant_WithInvalidValue_ReturnsFalse()
     {
-        bool result = Letter.TryGetValue('1', out var resultLetter);
+        bool result = Letter.TryGetFromValue('1', out var resultLetter);
         
         result.Should().BeFalse();
         resultLetter.Should().BeNull();
@@ -77,7 +77,7 @@ public class GetTests
     [Fact]
     public void TryGetAppConstant_WithNullValue_ReturnsFalse()
     {
-        bool result = Role.TryGetValue(null!, out var resultRole);
+        bool result = Role.TryGetFromValue(null!, out var resultRole);
         
         result.Should().BeFalse();
         resultRole.Should().BeNull();

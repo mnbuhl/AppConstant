@@ -16,6 +16,12 @@ public class AppConstantOptions
 
 public static class AppConstantConfiguration
 {
+    /// <summary>
+    /// Adds AppConstant services to the MVC builder.
+    /// </summary>
+    /// <param name="builder">MVC builder to add services to.</param>
+    /// <param name="assembly">Assembly to scan for AppConstant types.</param>
+    /// <seealso cref="AddAppConstant(IMvcBuilder, Action&lt;AppConstantOptions&gt;)"/>
     public static IMvcBuilder AddAppConstant(this IMvcBuilder builder, Assembly assembly)
     {
         return builder.AddAppConstant(new AppConstantOptions
@@ -24,6 +30,12 @@ public static class AppConstantConfiguration
         });
     }
     
+    /// <summary>
+    /// Adds AppConstant services to the MVC builder.
+    /// </summary>
+    /// <param name="builder">MVC builder to add services to.</param>
+    /// <param name="options">Options to configure AppConstant.</param>
+    /// <seealso cref="AddAppConstant(IMvcBuilder, Assembly)"/>
     public static IMvcBuilder AddAppConstant(this IMvcBuilder builder, Action<AppConstantOptions>? options = null)
     {
         var appConstantOptions = new AppConstantOptions();

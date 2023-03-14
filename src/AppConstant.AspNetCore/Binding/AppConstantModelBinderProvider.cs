@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AppConstant.AspNetCore.Binding;
 
-public class AppConstantModelBinderProvider : IModelBinderProvider
+internal class AppConstantModelBinderProvider : IModelBinderProvider
 {
     public IModelBinder? GetBinder(ModelBinderProviderContext? context)
     {

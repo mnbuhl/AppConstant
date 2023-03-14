@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AppConstant.AspNetCore.Binding;
 
-public class AppConstantModelBinder : IModelBinder
+internal class AppConstantModelBinder : IModelBinder
 {
     public Task BindModelAsync(ModelBindingContext? bindingContext)
     {

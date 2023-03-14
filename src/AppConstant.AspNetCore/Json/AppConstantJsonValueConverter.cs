@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace AppConstant.AspNetCore.Json;
 
-public class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TConst> 
+internal class AppConstantJsonValueConverter<TConst, TValue> : JsonConverter<TConst> 
     where TConst : AppConstant<TConst, TValue>, new()
     where TValue : IEquatable<TValue>, IComparable<TValue>
 {

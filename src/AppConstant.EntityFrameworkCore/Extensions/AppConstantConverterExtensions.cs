@@ -5,6 +5,10 @@ namespace AppConstant.EntityFrameworkCore.Extensions;
 
 public static class AppConstantConverterExtensions
 {
+    /// <summary>
+    /// Adds converters for all AppConstant properties in the model.
+    /// </summary>
+    /// <param name="builder">Model builder to add converters to.</param>
     public static void AddAppConstantConverters(this ModelConfigurationBuilder builder)
     {
         var propertyTypes = builder.CreateModelBuilder(null).Model.GetEntityTypes()
