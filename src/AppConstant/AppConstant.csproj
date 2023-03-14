@@ -5,6 +5,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
+        <PackageId>AppConstant</PackageId>
+        <Title>AppConstant</Title>
+        <AssemblyName>AppConstant</AssemblyName>
+        <RootNamespace>AppConstant</RootNamespace>
+        <Description>A library to create type safe constants for your application.</Description>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+        <PackageTags>AppConstant;Constant;TypeSafe;TypeSafeConstant</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageVersion>1.0.0</PackageVersion>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/mnbuhl/AppConstant</RepositoryUrl>
     </PropertyGroup>
 
 </Project>

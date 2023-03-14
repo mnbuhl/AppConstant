@@ -4,6 +4,17 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>AppConstant.AspNetCore</PackageId>
+        <Title>AppConstant.AspNetCore</Title>
+        <AssemblyName>AppConstant.AspNetCore</AssemblyName>
+        <RootNamespace>AppConstant.AspNetCore</RootNamespace>
+        <Description>Model binding, JSON serialization and Swagger bindings for AppConstant</Description>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+        <PackageTags>AppConstant;Constant;TypeSafe;TypeSafeConstant;json;modelbinding;swagger</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageVersion>1.0.0</PackageVersion>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/mnbuhl/AppConstant</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
